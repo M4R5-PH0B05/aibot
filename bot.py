@@ -24,13 +24,13 @@ async def on_message(message):
         return
 
     text_content = message.content
-    print(text_content)
+
     response = openai.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": text_content}]
     )
+    if(str(response.choices[0]) != "Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='Hello! How can I assist you today?', role='assistant', function_call=None, tool_calls=None))"):
 
-    await message.channel.send(response.choices[0].message.content)
+        await message.channel.send(response.choices[0].message.content)
 
 bot.run(discord_token)
-
